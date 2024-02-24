@@ -6,7 +6,8 @@
 
 count=0
 
-while [ $count -lt 20 ]; do
+while [ $count -lt 20 ]
+do
 	((count++))
 	case $count in
 	4)
