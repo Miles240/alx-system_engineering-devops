@@ -5,10 +5,6 @@
 # Where only the part of the name after the first dash is displayed
 
 for i in *; do
-	if [ -f "$i" ]; then
-		filename=$(basename "$i" | cut -d "-" -f 2)
-		echo "$filename"
-	else
-		echo "$i is not a file"
-	fi
+	filename=$(basename "$i" | cut -d "-" -f 2)
+	echo "$filename"
 done
