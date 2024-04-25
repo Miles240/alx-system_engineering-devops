@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 pache on designated container
 
 echo "ServerName localhost" >> /etc/apache2.conf
