@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
-# Run Apache on the 265-0 Docker container.
-echo "ServerName localhost" >> /etc/apache2.conf
-sudo service apache2 start
+# what’s keeping your Ubuntu container’s Nginx installation from listening on port 8?
+# configures nginx to run and listen to port 80
+
+rm /etc/nginx/sites-enabled/default
+ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+service nginx restart
