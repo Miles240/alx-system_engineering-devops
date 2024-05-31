@@ -6,19 +6,24 @@ import json
 import requests
 import sys
 
-base_url = "https://jsonplaceholder.typicode.com"
-user_id = sys.argv[1]
-user_name = ""
-user_url = f"{base_url}/users"
 
-response = requests.get(user_url)
+user_id = int(sys.argv[1])
+user_url = f"https://jsonplaceholder.typicode.com/users/{user_id}"
+url = f"https://jsonplaceholder.typicode.com/todos?userId={user_id}"
 
-if response.status_code == 200:
-	users = response.json()
-	for user in users:
-		if user['id'] == user_id:
-			user_name = user['name']
+# Getting the username
+user_response = requests.get(user_url)
+if user_response.status_code == 200:
+    users = user_response.json()
+    user_name = users["name"]
 
-print(user_name)
+# Getting the todos
+todo_reponse = requests.get(url)
+if todo_reponse.status_code == 200:
+    todos = todo_reponse.json()
+    completed_task = [todo for todo in todos if todo["completed"]]
 
 
+print(f"Employee {user_name} is done with tasks({len(completed_task)}/{len(todos)}):")
+for tasks in completed_task:
+    print(f"\t{tasks['title']}")
