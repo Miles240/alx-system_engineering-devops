@@ -1,26 +1,20 @@
-todos = [
-    {"userId": 1, "id": 1, "title": "delectus aut autem", "completed": False},
-    {
-        "userId": 1,
-        "id": 2,
-        "title": "quis ut nam facilis et officia qui",
-        "completed": False,
-    },
-    {"userId": 1, "id": 1, "title": "fugiat veniam minus", "completed": False},
-    {"userId": 1, "id": 4, "title": "et porro tempora", "completed": True},
-    {
-        "userId": 1,
-        "id": 5,
-        "title": "laboriosam mollitia et enim quasi adipisci quia provident illum",
-        "completed": False,
-    },
-]
-done_task = 0
-undone_task = 0
-for todo in todos:
-	if todo['id'] == 1:
-		if todo["completed"] == False:
-			undone_task += 1
-		elif todo["completed"] == True:
-			done_task += 1
-print(undone_task)
+#!/usr/bin/python3
+"""Returns to-do list information for a given employee ID."""
+import requests
+import sys
+
+if __name__ == "__main__":
+    url = "https://jsonplaceholder.typicode.com/"
+    user = requests.get(url + "users/{}".format(sys.argv[1])).json()
+    todos = requests.get(url + "todos", params={"userId": sys.argv[1]}).json()
+
+    completed = [t.get("title") for t in todos if t.get("completed") is True]
+    
+    print(
+        "Employee {} is done with tasks({}/{}):".format(
+            user.get("name"), len(completed), len(todos)
+        )
+    )
+
+
+    [print("\t {}".format(c)) for c in completed]

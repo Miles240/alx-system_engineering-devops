@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
-"""Python script that, using this REST API, for a given employee ID, 
-    returns information about his/her TODO list progress"""
+"""Python script that, using this REST API, for a given employee ID,
+returns information about his/her TODOS list progress"""
 
 import requests
 import sys
@@ -15,18 +15,22 @@ if __name__ == "__main__":
     user_response = requests.get(user_url)
     if user_response.status_code == 200:
         users = user_response.json()
-        user_name = users["name"]
+        user_name = users.get("name")
 
     # Getting the todos
     todo_reponse = requests.get(url)
     if todo_reponse.status_code == 200:
         todos = todo_reponse.json()
-        completed_task = [todo for todo in todos if todo["completed"] is True]
+        completed_task = [
+            todo for todo in todos if todo.get("completed") is True
+            ]
 
     print(
-        f"Employee {user_name} is done with tasks({len(completed_task)}/{len(todos)}):"
+        f"Employee \
+            {user_name} is done with tasks\
+                ({len(completed_task)}/{len(todos)}):"
     )
-    # for tasks in completed_task:
-    #     print(f"\t{tasks['title']}")
+    for tasks in completed_task:
+        print(f"\t{tasks.get('title')}")
 
-    print("\n".join(f"\t {task['title']}" for task in completed_task))
+    # print("\n".join(f"\t {task.get('title')}" for task in completed_task))
