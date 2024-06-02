@@ -32,5 +32,3 @@ if __name__ == "__main__":
     )
     for tasks in completed_task:
         print(f"\t{tasks.get('title')}")
-
-    # print("\n".join(f"\t {task.get('title')}" for task in completed_task))
