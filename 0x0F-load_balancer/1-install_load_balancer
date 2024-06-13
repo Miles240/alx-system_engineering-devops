@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-installs and configures HAproxy in a load balancer server
+# installs and configures HAproxy in a load balancer server
 
 sudo apt-get install -y software-properties-common
 sudo add-apt-repository -y ppa:vbernat/haproxy-1.8
