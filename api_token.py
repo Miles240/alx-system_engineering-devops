@@ -18,13 +18,13 @@ if TOKEN:
 
     # Make a request to the Reddit API using the access token
     respond = requests.get(
-        "https://oauth.reddit.com/r/webdev/comments/1ddbewt/even_apple_makes_mistakes",
+        "https://oauth.reddit.com/r/webdev/about",
         headers=headers,
     )
 
     # Print the response JSON for debugging
     with open("file.json", "w", encoding="utf-8") as file:
-        json.dump(respond.json(), file)
+        json.dump(respond.json(), file, sort_keys=True)
     # print(len(respond.json()))
 else:
     print("Failed to obtain access token")
