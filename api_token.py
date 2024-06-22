@@ -18,7 +18,7 @@ if TOKEN:
 
     # Make a request to the Reddit API using the access token
     respond = requests.get(
-        "https://oauth.reddit.com/r/webdev/about",
+        "https://oauth.reddit.com/r/python/hot.json?limit=0",
         headers=headers,
     )
 
