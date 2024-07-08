@@ -15,13 +15,13 @@ def recurse(subreddit, hot_list=[], after=""):
                        allow_redirects=False, params=params)
 
     if res.status_code == 200:
-        after = res.json().get('data').get('after')
-        children = res.json().get('data').get('children')
+        after = res.json().get('data', {}).get('after')
+        children = res.json().get('data', {}).get('children')
         for child in children:
             data = child.get('data')
             hot_list.append(child.get('title'))
 
-        if after is None:
+        if after is None:# checks if theres a next page
             return hot_list
         else:
             return recurse(subreddit, hot_list, after)
